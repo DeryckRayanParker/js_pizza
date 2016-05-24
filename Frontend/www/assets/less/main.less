@@ -2,7 +2,6 @@
 @import "pizza/pizza-card";
 @primary-color: #EA862E;
 @right-panel-width: 320px;
-
 .logo {
 	width: 100px;
 	height: 90px;
@@ -130,10 +129,9 @@ hr {
 .nav .pizza-filter.active a {
 	background-color: @primary-color;
 }
-.nav .pizza-filter.active a:hover{
+.nav .pizza-filter.active a:hover {
 	background-color: @primary-color;
 }
-
 .right-panel {
 	position: fixed!important;
 	width: @right-panel-width;
@@ -144,16 +142,12 @@ hr {
 	background-color: #fff;
 	float: right;
 	z-index: 10000;
-	box-shadow: 0 0  15px rgba(0,0,0,0.5);
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
-
-
-
 .main-field {
 	padding-left: 120px;
 	padding-right: @right-panel-width+40px;
 }
-
 .footer {
 	text-align: center;
 	margin-right: @right-panel-width;
@@ -161,12 +155,10 @@ hr {
 	margin-top: 20px;
 	margin-bottom: 30px;
 }
-
 .summary-top {
 	height: 91px;
 	padding: 30px 10px 5px 10px;
 }
-
 .summary-bottom {
 	position: absolute;
 	height: 130px;
@@ -175,51 +167,82 @@ hr {
 	background-color: #fff;
 	padding: 10px 20px 10px 20px;
 }
-
 .summary-main {
 	background-color: #F5F5F5;
 	height: 100%;
 }
-
 .order-counter {
 	background-color: @primary-color;
 	margin-left: 5px;
 }
-
 .right-panel-title {
 	font-weight: bold;
 	font-size: 20px;
 }
-
 #clean-order {
 	color: #A8A5A2;
 	font-size: 13px;
 	margin-left: 15px;
 }
-
 .summary-total-title {
 	font-weight: bold;
 	font-size: 17px;
 }
-
 #summary-total-counter {
 	font-weight: bold;
 	font-size: 20px;
 	float: right;
 }
-
 .summary-total {
 	margin: 10px;
 }
-
 #order-btn {
 	width: 100%;
 	margin-top: 5px;
 }
-
 #gag-message {
 	padding-top: 30px;
 	text-align: center;
 	font-size: 17px;
 	color: gray;
+}
+.pizza-ordered-pic {
+	position: absolute;
+	right: -60px;
+	height: 100px;
+}
+.pizza-ordered {
+	height: 120px;
+	position: relative;
+	padding: 5px;
+	border-bottom: 1px solid #A1A1A1;
+}
+.pizza-ordered-title {
+	margin: 15px 20px 0 20px;
+	color: @primary-color;
+	font-size: 17px;
+}
+.ordered-size {
+	float: left;
+	margin-right: 20px;
+}
+.pizza-ordered-info {
+	margin: 5px 20px 5px 20px;
+}
+.circle-btn {
+	border-radius: 50%;
+	min-width: 25px;
+	min-height: 23px;
+}
+.rm-btn {
+	color: @primary-color;
+	margin-left: 15px;
+}
+.pizza-ordered-pricing-space {
+	padding: 5px 0 0 15px;
+	font-size: 15px;
+	font-weight: bold;
+}
+.ordered-price {
+	margin-right: 20px;
 }
