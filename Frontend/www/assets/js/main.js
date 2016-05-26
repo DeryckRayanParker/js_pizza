@@ -184,9 +184,9 @@ module.exports = pizza_info;
 var ejs = require('ejs');
 
 
-exports.PizzaMenu_OneItem = ejs.compile("<%\n\nfunction getIngredientsArray(pizza) {\n    //Отримує вміст піци\n    var content = pizza.content;\n    var result = [];\n\n    //Object.keys повертає масив ключів в об’єкті JavaScript\n\n    Object.keys(content).forEach(function(key){\n\n        //a.concat(b) створює спільний масив із масивів a та b\n        result = result.concat(content[key]);\n    });\n\n    return result;\n}\n\n   %>\n<div class=\"col-md-6 col-lg-4 pizza-card\">\n    <div class=\"thumbnail\">\n        <img class=\"pizza-icon\" src=\"<%= pizza.icon %>\" alt=\"Pizza\">\n\n        <% if(pizza.is_new) { %>\n        <span class=\"label label-danger\">Нова</span>\n        <% } else if(pizza.is_popular) {%>\n        <span class=\"label label-success\">Популярна</span>\n        <% } %>\n\n        <div class=\"caption\">\n            <span class=\"title\"><%= pizza.title %></span>\n            <div class=\"type\"><%= pizza.type %></div>\n            <div class=\"description\">\n                <%= getIngredientsArray(pizza).join(\", \") %>\n            </div>\n        </div>\n\n        <!-- Перед тим щоб показати кнопку необхідно переконатися, що піца має великий розмір -->\n        <button class=\"btn btn-primary buy-big\">Купити велику</button>\n    </div>\n</div>");
+exports.PizzaMenu_OneItem = ejs.compile("<%\r\n\r\nfunction getIngredientsArray(pizza) {\r\n    //Отримує вміст піци\r\n    var content = pizza.content;\r\n    var result = [];\r\n\r\n    //Object.keys повертає масив ключів в об’єкті JavaScript\r\n\r\n    Object.keys(content).forEach(function(key){\r\n\r\n        //a.concat(b) створює спільний масив із масивів a та b\r\n        result = result.concat(content[key]);\r\n    });\r\n\r\n    return result;\r\n}\r\n\r\n   %>\r\n<div class=\"col-md-6 col-lg-4 pizza-card\">\r\n    <div class=\"thumbnail\">\r\n        <img class=\"pizza-icon\" src=\"<%= pizza.icon %>\" alt=\"Pizza\">\r\n\r\n        <% if(pizza.is_new) { %>\r\n        <span class=\"label label-danger\">Нова</span>\r\n        <% } else if(pizza.is_popular) {%>\r\n        <span class=\"label label-success\">Популярна</span>\r\n        <% } %>\r\n\r\n        <div class=\"caption\">\r\n            <span class=\"title\"><%= pizza.title %></span>\r\n            <div class=\"type\"><%= pizza.type %></div>\r\n            <div class=\"description\">\r\n                <%= getIngredientsArray(pizza).join(\", \") %>\r\n            </div>\r\n        </div>\r\n\r\n        <!-- Перед тим щоб показати кнопку необхідно переконатися, що піца має великий розмір -->\r\n        <button class=\"btn btn-primary buy-big\">Купити велику</button>\r\n    </div>\r\n</div>");
 
-exports.PizzaCart_OneItem = ejs.compile("<div>\n    <%= pizza.title %> (<%= size %>)\n    <div>Ціна: <%= pizza[size].price %> грн.</div>\n    <div>\n        <button class=\"btn btn-danger minus\">-</button>\n        <span class=\"label label-default\"><%= quantity %></span>\n        <button class=\"btn btn-success plus\">+</button>\n    </div>\n</div>");
+exports.PizzaCart_OneItem = ejs.compile("<div>\r\n    <%= pizza.title %> (<%= size %>)\r\n    <div>Ціна: <%= pizza[size].price %> грн.</div>\r\n    <div>\r\n        <button class=\"btn btn-danger minus\">-</button>\r\n        <span class=\"label label-default\"><%= quantity %></span>\r\n        <button class=\"btn btn-success plus\">+</button>\r\n    </div>\r\n</div>");
 
 },{"ejs":6}],3:[function(require,module,exports){
 /**
@@ -874,6 +874,10 @@ Template.prototype = {
       , d = this.opts.delimiter;
 
     if (matches && matches.length) {
+      if (this.opts.compileDebug && this.opts.filename) {
+        this.source =  '    ; __lines = ' + JSON.stringify(this.templateText) + '\n';
+        this.source += '    ; __filename = "' + this.opts.filename.replace(/\\/g,  '/') + '"\n';
+      }
       matches.forEach(function (line, index) {
         var opening
           , closing
@@ -1057,6 +1061,12 @@ Template.prototype = {
     }
   }
 };
+
+/*
+ * Export the internal function for escaping XML so people
+ * can use for manual escaping if needed
+ * */
+exports.escapeXML = utils.escapeXML;
 
 /**
  * Express.js support.
@@ -1251,7 +1261,7 @@ module.exports={
     "engine",
     "ejs"
   ],
-  "version": "2.4.1",
+  "version": "2.4.2",
   "author": {
     "name": "Matthew Eernisse",
     "email": "mde@fleegix.org",
@@ -1290,16 +1300,17 @@ module.exports={
   },
   "scripts": {
     "test": "mocha",
+    "sample": "npm install express && node sample/index.js",
     "coverage": "istanbul cover node_modules/mocha/bin/_mocha",
     "doc": "rimraf out && jsdoc -c jsdoc.json lib/* docs/jsdoc/*",
     "devdoc": "rimraf out && jsdoc -p -c jsdoc.json lib/* docs/jsdoc/*"
   },
-  "_id": "ejs@2.4.1",
-  "_shasum": "82e15b1b2a1f948b18097476ba2bd7c66f4d1566",
-  "_resolved": "https://registry.npmjs.org/ejs/-/ejs-2.4.1.tgz",
+  "_id": "ejs@2.4.2",
+  "_shasum": "7057eb4812958fb731841cd9ca353343efe597b1",
+  "_resolved": "https://registry.npmjs.org/ejs/-/ejs-2.4.2.tgz",
   "_from": "ejs@>=2.4.1 <3.0.0",
-  "_npmVersion": "2.10.1",
-  "_nodeVersion": "0.12.4",
+  "_npmVersion": "2.15.1",
+  "_nodeVersion": "4.4.4",
   "_npmUser": {
     "name": "mde",
     "email": "mde@fleegix.org"
@@ -1315,11 +1326,14 @@ module.exports={
     }
   ],
   "dist": {
-    "shasum": "82e15b1b2a1f948b18097476ba2bd7c66f4d1566",
-    "tarball": "http://registry.npmjs.org/ejs/-/ejs-2.4.1.tgz"
+    "shasum": "7057eb4812958fb731841cd9ca353343efe597b1",
+    "tarball": "https://registry.npmjs.org/ejs/-/ejs-2.4.2.tgz"
   },
-  "directories": {},
-  "readme": "ERROR: No README data found!"
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/ejs-2.4.2.tgz_1464117640663_0.8193834638223052"
+  },
+  "directories": {}
 }
 
 },{}],9:[function(require,module,exports){
@@ -1562,6 +1576,9 @@ var currentQueue;
 var queueIndex = -1;
 
 function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
     draining = false;
     if (currentQueue.length) {
         queue = currentQueue.concat(queue);
