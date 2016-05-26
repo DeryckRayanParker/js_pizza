@@ -19,15 +19,19 @@ var $cart = $("#cart");
 
 function addToCart(pizza, size) {
 	//Додавання однієї піци в кошик покупок
-
-	//Приклад реалізації, можна робити будь-яким іншим способом
-	Cart.push({
+	item = {
 		pizza: pizza,
 		size: size,
 		quantity: 1
-	});
-	var orders = parseInt($('#order-counter').html());
-	$('#order-counter').html(orders += 1);
+	};
+	
+	if(Cart.filter(function(e) { return e.pizza.title === pizza.title && e.size===size;}).length>0){
+		Cart.filter(function(e) { return e.pizza.title === pizza.title && e.size===size;})[0].quantity+=1;
+	}
+	else{
+	//Приклад реалізації, можна робити будь-яким іншим способом
+	Cart.push(item);
+	}
 
 	//Оновити вміст кошика на сторінці
 	updateCart();
@@ -45,7 +49,6 @@ function removeFromCart(cart_item) {
 function removeAll() {
 	Cart = [];
 	basil.set('cart', Cart);
-	$('#order-counter').html(0);
 	updateCart();
 }
 
@@ -94,14 +97,13 @@ function updateCart() {
 		});
 
 		$node.find('.rm-btn').click(function () {
-			var orders = parseInt($('#order-counter').html());
-			$('#order-counter').html(orders -= 1);
 			removeFromCart(cart_item);
 		});
 
 		$cart.append($node);
 	}
 
+	$('#order-counter').html(Cart.length);
 	Cart.forEach(showOnePizzaInCart);
 	if (Cart.length === 0) {
 		$cart.append('<div id="gag-message">Порожньо в холодильнику?						<br/> Замовте піцу!</div>');
