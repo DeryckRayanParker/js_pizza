@@ -35,6 +35,7 @@ function removeFromCart(cart_item) {
     //Видалити піцу з кошика
     //TODO: треба зробити
 	Cart.splice(Cart.indexOf(cart_item),1);
+	basil.set('cart', Cart);
     //Після видалення оновити відображення
     updateCart();
 }
@@ -76,11 +77,22 @@ function updateCart() {
 
         $node.find(".plus").click(function(){
             //Збільшуємо кількість замовлених піц
-            cart_item.quantity += 1;
-
+            cart_item.quantity +=1;
             //Оновлюємо відображення
             updateCart();
         });
+		$node.find(".minus").click(function(){
+			if(cart_item.quantity>1){
+				cart_item.quantity -=1;
+			}else{
+				$node.find('.rm-btn').click();
+			}
+            updateCart();
+        });
+		
+		$node.find('.rm-btn').click(function(){
+			removeFromCart(cart_item);
+		});
 
         $cart.append($node);
     }
