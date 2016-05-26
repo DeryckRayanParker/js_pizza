@@ -42,8 +42,7 @@ function removeFromCart(cart_item) {
 function removeAll(){
 	Cart = [];
 	basil.set('cart', Cart);
-	$cart.html('');
-	updateCart;
+	updateCart();
 }
 
 function initialiseCart() {
@@ -87,6 +86,9 @@ function updateCart() {
     }
 
     Cart.forEach(showOnePizzaInCart);
+	if(Cart.length===0){
+		$cart.append('<div id="gag-message">Порожньо в холодильнику?						<br/> Замовте піцу!</div>');
+	}
 	//save to local storage
 	basil.set('cart', Cart);
 }
