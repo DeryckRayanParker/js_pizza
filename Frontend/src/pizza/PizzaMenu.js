@@ -41,8 +41,8 @@ function filterPizza(filter) {
 		if (filter === '') {
 			pizza_shown.push(pizza);
 		} else if ((filter === 'meat-filter' && pizza.content.meat) || (filter === 'mushrooms-filter' && pizza.content.mushroom) || (filter === 'pineapple-filter' && pizza.content.pineapple) ||
-		(filter === 'ocean-filter' && pizza.content.ocean) ||
-		(filter === 'vega-filter' && pizza.type === 'Вега піца')) {
+			(filter === 'ocean-filter' && pizza.content.ocean) ||
+			(filter === 'vega-filter' && pizza.type === 'Вега піца')) {
 			pizza_shown.push(pizza);
 		}
 	});

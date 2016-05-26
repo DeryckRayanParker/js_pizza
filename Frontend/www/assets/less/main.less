@@ -186,15 +186,15 @@ hr {
 	font-size: 13px;
 	margin-left: 7px;
 }
-
-#clear-order:hover{
+#clear-order:hover {
 	cursor: pointer;
 }
 #summary-total-title {
 	font-weight: bold;
 	font-size: 17px;
 }
-.summary-total-counter, #summary-total-counter {
+.summary-total-counter,
+#summary-total-counter {
 	font-weight: bold;
 	font-size: 20px;
 	float: right;
@@ -202,7 +202,7 @@ hr {
 }
 #summary-total {
 	margin: 10px;
-	
+	min-height: 30px;
 }
 #order-btn {
 	width: 100%;
@@ -237,11 +237,6 @@ hr {
 .pizza-ordered-info {
 	margin: 5px 20px 5px 20px;
 }
-.circle-btn {
-	border-radius: 50%;
-	min-width: 25px;
-	min-height: 23px;
-}
 .rm-btn {
 	color: @primary-color;
 	margin-left: 15px;
@@ -258,16 +253,15 @@ hr {
 	color: #fff;
 	background-color: @primary-color;
 }
-
-
-
-
-
-
-
 ul.nav-custom {
 	max-width: 600px;
 	margin: 0 auto;
 }
-
-
+.circle-btn {
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	padding: 6px 0;
+	font-size: 12px;
+	border-radius: 15px;
+}

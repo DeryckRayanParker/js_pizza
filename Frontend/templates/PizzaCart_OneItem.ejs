@@ -1,23 +1,23 @@
 <div class="pizza-ordered">
-						<img class="pizza-ordered-pic" src="<%= pizza.icon %>" />
-						<p class="pizza-ordered-title">
-							<%= pizza.title %>
-						</p>
-						<div class="pizza-ordered-info">
-							<div class="ordered-size">
-								<img src="assets/images/size-icon.svg" />
-								<span class="size"><%= size %></span>
-							</div>
-							<div>
-								<img src="assets/images/weight.svg" />
-								<span class="weight"><%= pizza[size].weight %></span>
-							</div>
-						</div>
-						<div class="pizza-ordered-pricing-space">
-							<span class="ordered-price"><%= pizza[size].price %> грн</span>
-							<a class="btn minus btn-xs btn-danger circle-btn"><span class="glyphicon glyphicon-minus"></span></a>
-							<span class="pizza-ordered-counter"> <%= quantity %> </span>
-							<a class="btn plus btn-xs btn-success circle-btn"><span class="glyphicon glyphicon-plus"></span></a>
-							<a class="btn btn-xs btn-default circle-btn rm-btn"><span class="glyphicon glyphicon-remove"></span></a>
-						</div>
-					</div>
+	<img class="pizza-ordered-pic" src="<%= pizza.icon %>" />
+	<p class="pizza-ordered-title">
+		<%= pizza.title %>
+	</p>
+	<div class="pizza-ordered-info">
+		<div class="ordered-size">
+			<img src="assets/images/size-icon.svg" />
+			<span class="size"><%= pizza[size].size %></span>
+		</div>
+		<div>
+			<img src="assets/images/weight.svg" />
+			<span class="weight"><%= pizza[size].weight %></span>
+		</div>
+	</div>
+	<div class="pizza-ordered-pricing-space">
+		<span class="ordered-price"><%= pizza[size].price %> грн</span>
+		<a class="btn minus btn-xs btn-danger circle-btn"><span class="glyphicon glyphicon-minus"></span></a>
+		<span class="pizza-ordered-counter"> <%= quantity %> </span>
+		<a class="btn plus btn-xs btn-success circle-btn"><span class="glyphicon glyphicon-plus"></span></a>
+		<a class="btn btn-xs btn-default circle-btn rm-btn"><span class="glyphicon glyphicon-remove"></span></a>
+	</div>
+</div>
