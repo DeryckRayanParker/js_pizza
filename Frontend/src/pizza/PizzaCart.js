@@ -7,8 +7,8 @@ basil = new basil();
 
 //Перелік розмірів піци
 var PizzaSize = {
-    Big: "big_size",
-    Small: "small_size"
+	Big: "big_size",
+	Small: "small_size"
 };
 
 //Змінна в якій зберігаються перелік піц в кошику
@@ -18,87 +18,92 @@ var Cart = [];
 var $cart = $("#cart");
 
 function addToCart(pizza, size) {
-    //Додавання однієї піци в кошик покупок
+	//Додавання однієї піци в кошик покупок
 
-    //Приклад реалізації, можна робити будь-яким іншим способом
-    Cart.push({
-        pizza: pizza,
-        size: size,
-        quantity: 1
-    });
+	//Приклад реалізації, можна робити будь-яким іншим способом
+	Cart.push({
+		pizza: pizza,
+		size: size,
+		quantity: 1
+	});
+	var orders = parseInt($('#order-counter').html());
+	$('#order-counter').html(orders += 1);
 
-    //Оновити вміст кошика на сторінці
-    updateCart();
+	//Оновити вміст кошика на сторінці
+	updateCart();
 }
 
 function removeFromCart(cart_item) {
-    //Видалити піцу з кошика
-    //TODO: треба зробити
-	Cart.splice(Cart.indexOf(cart_item),1);
+	//Видалити піцу з кошика
+	//TODO: треба зробити
+	Cart.splice(Cart.indexOf(cart_item), 1);
 	basil.set('cart', Cart);
-    //Після видалення оновити відображення
-    updateCart();
+	//Після видалення оновити відображення
+	updateCart();
 }
 
-function removeAll(){
+function removeAll() {
 	Cart = [];
 	basil.set('cart', Cart);
+	$('#order-counter').html(0);
 	updateCart();
 }
 
 function initialiseCart() {
-    //Фукнція віпрацьвуватиме при завантаженні сторінки
-    //Тут можна наприклад, зчитати вміст корзини який збережено в Local Storage то показати його
-    //TODO: ...
+	//Фукнція віпрацьвуватиме при завантаженні сторінки
+	//Тут можна наприклад, зчитати вміст корзини який збережено в Local Storage то показати його
+	//TODO: ...
 	var saved_pizzas = basil.get('cart');
-	if(saved_pizzas){
+	if (saved_pizzas) {
 		Cart = saved_pizzas;
 	}
-    updateCart();
+	updateCart();
 }
 
 function getPizzaInCart() {
-    //Повертає піци які зберігаються в кошику
-    return Cart;
+	//Повертає піци які зберігаються в кошику
+	return Cart;
 }
 
 function updateCart() {
-    //Функція викликається при зміні вмісту кошика
-    //Тут можна наприклад показати оновлений кошик на екрані та зберегти вміт кошика в Local Storage
-	
-    //Очищаємо старі піци в кошику
-    $cart.html("");
-	
-    //Онволення однієї піци
-    function showOnePizzaInCart(cart_item) {
-        var html_code = Templates.PizzaCart_OneItem(cart_item);
+	//Функція викликається при зміні вмісту кошика
+	//Тут можна наприклад показати оновлений кошик на екрані та зберегти вміт кошика в Local Storage
 
-        var $node = $(html_code);
+	//Очищаємо старі піци в кошику
+	$cart.html("");
 
-        $node.find(".plus").click(function(){
-            //Збільшуємо кількість замовлених піц
-            cart_item.quantity +=1;
-            //Оновлюємо відображення
-            updateCart();
-        });
-		$node.find(".minus").click(function(){
-			if(cart_item.quantity>1){
-				cart_item.quantity -=1;
-			}else{
+	//Онволення однієї піци
+	function showOnePizzaInCart(cart_item) {
+		var html_code = Templates.PizzaCart_OneItem(cart_item);
+
+		var $node = $(html_code);
+
+		$node.find(".plus").click(function () {
+			//Збільшуємо кількість замовлених піц
+			cart_item.quantity += 1;
+			//Оновлюємо відображення
+			updateCart();
+		});
+		$node.find(".minus").click(function () {
+			if (cart_item.quantity > 1) {
+				cart_item.quantity -= 1;
+			} else {
 				$node.find('.rm-btn').click();
 			}
-            updateCart();
-        });
-		
-		$node.find('.rm-btn').click(function(){
+			updateCart();
+		});
+
+		$node.find('.rm-btn').click(function () {
+			var orders = parseInt($('#order-counter').html());
+			$('#order-counter').html(orders -= 1);
 			removeFromCart(cart_item);
 		});
 
-        $cart.append($node);
-    }
+		$cart.append($node);
+	}
 
-    Cart.forEach(showOnePizzaInCart);
-	if(Cart.length===0){
+	Cart.forEach(showOnePizzaInCart);
+	if (Cart.length === 0) {
 		$cart.append('<div id="gag-message">Порожньо в холодильнику?						<br/> Замовте піцу!</div>');
 	}
 	//save to local storage
