@@ -102,12 +102,25 @@ function updateCart() {
 
 		$cart.append($node);
 	}
-
-	$('#order-counter').html(Cart.length);
-	Cart.forEach(showOnePizzaInCart);
+	var total=0;
+	Cart.forEach(function(e){
+		showOnePizzaInCart(e);
+		total += (e.pizza[e.size].price*e.quantity);
+		console.warn(e.pizza[e.size].price+' + '+e.quantity);
+	});
 	if (Cart.length === 0) {
 		$cart.append('<div id="gag-message">Порожньо в холодильнику?						<br/> Замовте піцу!</div>');
+		$('#summary-total').attr('hidden', true);
+		$('#order-btn').attr('disabled', true);
+	}else{
+		$('#summary-total').attr('hidden', false);
+		$('#order-btn').attr('disabled', false);
+		$('#summary-total-counter').html(total);
 	}
+	
+	$('#order-counter').html(Cart.length);
+	
+	
 	//save to local storage
 	basil.set('cart', Cart);
 }
