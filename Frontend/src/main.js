@@ -10,6 +10,40 @@ $(function(){
 
     PizzaCart.initialiseCart();
     PizzaMenu.initialiseMenu();
+	
+	$("#all-pizza-filter").click(function(){
+		PizzaMenu.filterPizza('');
+		$('.nav li').removeClass('active');
+		$(this).addClass('active');
+	});
+	
+	$("#meat-pizza-filter").click(function(){
+		PizzaMenu.filterPizza('meat-filter');
+		$('.nav li').removeClass('active');
+		$(this).addClass('active');
+	});
 
-
+	$("#seefood-pizza-filter").click(function(){
+		PizzaMenu.filterPizza('ocean-filter');
+		$('.nav li').removeClass('active');
+		$(this).addClass('active');
+	});
+	
+	$("#mushroom-pizza-filter").click(function(){
+		PizzaMenu.filterPizza('mushrooms-filter');
+		$('.nav li').removeClass('active');
+		$(this).addClass('active');
+	});
+	
+	$("#pineapple-pizza-filter").click(function(){
+		PizzaMenu.filterPizza('pineapple-filter');
+		$('.nav li').removeClass('active');
+		$(this).addClass('active');
+	});
+	
+	$("#no-meat-pizza-filter").click(function(){
+		PizzaMenu.filterPizza('vega-filter');
+		$('.nav li').removeClass('active');
+		$(this).addClass('active');
+	});
 });

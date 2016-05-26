@@ -9,46 +9,51 @@ var Pizza_List = require('../Pizza_List');
 var $pizza_list = $("#pizza_list");
 
 function showPizzaList(list) {
-    //Очищаємо старі піци в кошику
-    $pizza_list.html("");
+	//Очищаємо старі піци в кошику
+	$pizza_list.html("");
 
-    //Онволення однієї піци
-    function showOnePizza(pizza) {
-        var html_code = Templates.PizzaMenu_OneItem({pizza: pizza});
+	//Онволення однієї піци
+	function showOnePizza(pizza) {
+		var html_code = Templates.PizzaMenu_OneItem({
+			pizza: pizza
+		});
 
-        var $node = $(html_code);
+		var $node = $(html_code);
 
-        $node.find(".buy-big").click(function(){
-            PizzaCart.addToCart(pizza, PizzaCart.PizzaSize.Big);
-        });
-        $node.find(".buy-small").click(function(){
-            PizzaCart.addToCart(pizza, PizzaCart.PizzaSize.Small);
-        });
+		$node.find(".buy-lg-button").click(function () {
+			PizzaCart.addToCart(pizza, PizzaCart.PizzaSize.Big);
+		});
+		$node.find(".buy-sm-button").click(function () {
+			PizzaCart.addToCart(pizza, PizzaCart.PizzaSize.Small);
+		});
 
-        $pizza_list.append($node);
-    }
+		$pizza_list.append($node);
+	}
 
-    list.forEach(showOnePizza);
+	list.forEach(showOnePizza);
 }
 
 function filterPizza(filter) {
-    //Масив куди потраплять піци які треба показати
-    var pizza_shown = [];
+	//Масив куди потраплять піци які треба показати
+	var pizza_shown = [];
 
-    Pizza_List.forEach(function(pizza){
-        //Якщо піка відповідає фільтру
-        //pizza_shown.push(pizza);
+	Pizza_List.forEach(function (pizza) {
+		if (filter === '') {
+			pizza_shown.push(pizza);
+		} else if ((filter === 'meat-filter' && pizza.content.meat) || (filter === 'mushrooms-filter' && pizza.content.mushroom) || (filter === 'pineapple-filter' && pizza.content.pineapple) ||
+		(filter === 'ocean-filter' && pizza.content.ocean) ||
+		(filter === 'vega-filter' && pizza.type === 'Вега піца')) {
+			pizza_shown.push(pizza);
+		}
+	});
 
-        //TODO: зробити фільтри
-    });
-
-    //Показати відфільтровані піци
-    showPizzaList(pizza_shown);
+	//Показати відфільтровані піци
+	showPizzaList(pizza_shown);
 }
 
 function initialiseMenu() {
-    //Показуємо усі піци
-    showPizzaList(Pizza_List)
+	//Показуємо усі піци
+	showPizzaList(Pizza_List)
 }
 
 exports.filterPizza = filterPizza;
