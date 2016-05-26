@@ -36,7 +36,7 @@ $(function(){
 	});
 	
 	$("#pineapple-pizza-filter").click(function(){
-		PizzaMenu.filterPizza('pineapple-filter');
+		PizzaMenu.filterPizza('ocean-filter');
 		$('.nav li').removeClass('active');
 		$(this).addClass('active');
 	});
@@ -45,5 +45,9 @@ $(function(){
 		PizzaMenu.filterPizza('vega-filter');
 		$('.nav li').removeClass('active');
 		$(this).addClass('active');
+	});
+	
+	$('#clear-order').click(function(){
+		PizzaCart.removeAll();
 	});
 });
