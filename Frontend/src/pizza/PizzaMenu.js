@@ -40,9 +40,8 @@ function filterPizza(filter) {
 	Pizza_List.forEach(function (pizza) {
 		if (filter === '') {
 			pizza_shown.push(pizza);
-		} else if ((filter === 'meat-filter' && pizza.content.meat) || (filter === 'mushrooms-filter' && pizza.content.mushroom) || (filter === 'pineapple-filter' && pizza.content.pineapple) ||
-			(filter === 'ocean-filter' && pizza.content.ocean) ||
-			(filter === 'vega-filter' && pizza.type === 'Вега піца')) {
+		} else if (pizza.content[filter]||
+			(filter === 'no-meat' && !(pizza.content['meat']))) {
 			pizza_shown.push(pizza);
 		}
 	});

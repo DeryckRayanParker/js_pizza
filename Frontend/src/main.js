@@ -18,31 +18,31 @@ $(function () {
 	});
 
 	$("#meat-pizza-filter").click(function () {
-		PizzaMenu.filterPizza('meat-filter');
+		PizzaMenu.filterPizza('meat');
 		$('.nav li').removeClass('active');
 		$(this).addClass('active');
 	});
 
 	$("#seefood-pizza-filter").click(function () {
-		PizzaMenu.filterPizza('ocean-filter');
+		PizzaMenu.filterPizza('ocean');
 		$('.nav li').removeClass('active');
 		$(this).addClass('active');
 	});
 
 	$("#mushroom-pizza-filter").click(function () {
-		PizzaMenu.filterPizza('mushrooms-filter');
+		PizzaMenu.filterPizza('mushroom');
 		$('.nav li').removeClass('active');
 		$(this).addClass('active');
 	});
 
 	$("#pineapple-pizza-filter").click(function () {
-		PizzaMenu.filterPizza('ocean-filter');
+		PizzaMenu.filterPizza('pineapple');
 		$('.nav li').removeClass('active');
 		$(this).addClass('active');
 	});
 
 	$("#no-meat-pizza-filter").click(function () {
-		PizzaMenu.filterPizza('vega-filter');
+		PizzaMenu.filterPizza('no-meat');
 		$('.nav li').removeClass('active');
 		$(this).addClass('active');
 	});
