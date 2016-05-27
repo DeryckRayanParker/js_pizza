@@ -204,36 +204,42 @@ $(function () {
 
 	$("#all-pizza-filter").click(function () {
 		PizzaMenu.filterPizza('');
+		$("#filter-title").html($(this).find('a').html()+' піци');
 		$('.nav li').removeClass('active');
 		$(this).addClass('active');
 	});
 
 	$("#meat-pizza-filter").click(function () {
-		PizzaMenu.filterPizza('meat-filter');
+		PizzaMenu.filterPizza('meat');
+		$("#filter-title").html($(this).find('a').html());
 		$('.nav li').removeClass('active');
 		$(this).addClass('active');
 	});
 
 	$("#seefood-pizza-filter").click(function () {
-		PizzaMenu.filterPizza('ocean-filter');
+		PizzaMenu.filterPizza('ocean');
+		$("#filter-title").html($(this).find('a').html());
 		$('.nav li').removeClass('active');
 		$(this).addClass('active');
 	});
 
 	$("#mushroom-pizza-filter").click(function () {
-		PizzaMenu.filterPizza('mushrooms-filter');
+		PizzaMenu.filterPizza('mushroom');
+		$("#filter-title").html($(this).find('a').html());
 		$('.nav li').removeClass('active');
 		$(this).addClass('active');
 	});
 
 	$("#pineapple-pizza-filter").click(function () {
-		PizzaMenu.filterPizza('ocean-filter');
+		PizzaMenu.filterPizza('pineapple');
+		$("#filter-title").html($(this).find('a').html());
 		$('.nav li').removeClass('active');
 		$(this).addClass('active');
 	});
 
 	$("#no-meat-pizza-filter").click(function () {
-		PizzaMenu.filterPizza('vega-filter');
+		PizzaMenu.filterPizza('no-meat');
+		$("#filter-title").html($(this).find('a').html());
 		$('.nav li').removeClass('active');
 		$(this).addClass('active');
 	});
@@ -426,9 +432,8 @@ function filterPizza(filter) {
 	Pizza_List.forEach(function (pizza) {
 		if (filter === '') {
 			pizza_shown.push(pizza);
-		} else if ((filter === 'meat-filter' && pizza.content.meat) || (filter === 'mushrooms-filter' && pizza.content.mushroom) || (filter === 'pineapple-filter' && pizza.content.pineapple) ||
-			(filter === 'ocean-filter' && pizza.content.ocean) ||
-			(filter === 'vega-filter' && pizza.type === 'Вега піца')) {
+		} else if (pizza.content[filter]||
+			(filter === 'no-meat' && !(pizza.content['meat']))) {
 			pizza_shown.push(pizza);
 		}
 	});
