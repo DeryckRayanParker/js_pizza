@@ -435,11 +435,13 @@ function filterPizza(filter) {
 
 	//Показати відфільтровані піци
 	showPizzaList(pizza_shown);
+	$('#all-pizzas-counter').html(pizza_shown.length);
 }
 
 function initialiseMenu() {
 	//Показуємо усі піци
-	showPizzaList(Pizza_List)
+	showPizzaList(Pizza_List);
+	$('#all-pizzas-counter').html(Pizza_List.length);
 }
 
 exports.filterPizza = filterPizza;
