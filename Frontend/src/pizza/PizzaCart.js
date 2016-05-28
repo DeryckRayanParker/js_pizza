@@ -2,8 +2,7 @@
  * Created by chaika on 02.02.16.
  */
 var Templates = require('../Templates');
-var basil = require('basil.js');
-basil = new basil();
+var basil = require('../storage/storage');
 
 //Перелік розмірів піци
 var PizzaSize = {

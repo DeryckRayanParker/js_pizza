@@ -188,7 +188,7 @@ exports.PizzaMenu_OneItem = ejs.compile("<%\r\n\r\nfunction getIngredientsArray(
 
 exports.PizzaCart_OneItem = ejs.compile("<div class=\"pizza-ordered\">\r\n\t<img class=\"pizza-ordered-pic\" src=\"<%= pizza.icon %>\" />\r\n\t<p class=\"pizza-ordered-title\">\r\n\t\t<%= pizza.title %>\r\n\t</p>\r\n\t<div class=\"pizza-ordered-info\">\r\n\t\t<div class=\"ordered-size\">\r\n\t\t\t<img src=\"assets/images/size-icon.svg\" />\r\n\t\t\t<span class=\"size\"><%= pizza[size].size %></span>\r\n\t\t</div>\r\n\t\t<div>\r\n\t\t\t<img src=\"assets/images/weight.svg\" />\r\n\t\t\t<span class=\"weight\"><%= pizza[size].weight %></span>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"pizza-ordered-pricing-space\">\r\n\t\t<span class=\"ordered-price\"><%= pizza[size].price %> грн</span>\r\n\t\t<a class=\"btn minus btn-xs btn-danger circle-btn\"><span class=\"glyphicon glyphicon-minus\"></span></a>\r\n\t\t<span class=\"pizza-ordered-counter\"> <%= quantity %> </span>\r\n\t\t<a class=\"btn plus btn-xs btn-success circle-btn\"><span class=\"glyphicon glyphicon-plus\"></span></a>\r\n\t\t<a class=\"btn btn-xs btn-default circle-btn rm-btn\"><span class=\"glyphicon glyphicon-remove\"></span></a>\r\n\t</div>\r\n</div>\r\n");
 
-},{"ejs":7}],3:[function(require,module,exports){
+},{"ejs":8}],3:[function(require,module,exports){
 /**
  * Created by chaika on 25.01.16.
  */
@@ -254,8 +254,7 @@ $(function () {
  * Created by chaika on 02.02.16.
  */
 var Templates = require('../Templates');
-var basil = require('basil.js');
-basil = new basil();
+var basil = require('../storage/storage');
 
 //Перелік розмірів піци
 var PizzaSize = {
@@ -389,7 +388,7 @@ exports.initialiseCart = initialiseCart;
 exports.PizzaSize = PizzaSize;
 exports.removeAll = removeAll;
 
-},{"../Templates":2,"basil.js":6}],5:[function(require,module,exports){
+},{"../Templates":2,"../storage/storage":6}],5:[function(require,module,exports){
 /**
  * Created by chaika on 02.02.16.
  */
@@ -453,6 +452,17 @@ exports.filterPizza = filterPizza;
 exports.initialiseMenu = initialiseMenu;
 
 },{"../Pizza_List":1,"../Templates":2,"./PizzaCart":4}],6:[function(require,module,exports){
+var basil = require('basil.js');
+basil = new basil();
+
+exports.get = function (key) {
+	return basil.get(key);
+};
+exports.set = function (key, value) {
+	return basil.set(key, value);
+};
+
+},{"basil.js":7}],7:[function(require,module,exports){
 (function () {
 	// Basil
 	var Basil = function (options) {
@@ -821,7 +831,7 @@ exports.initialiseMenu = initialiseMenu;
 
 })();
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 /*
  * EJS Embedded JavaScript templates
  * Copyright 2112 Matthew Eernisse (mde@fleegix.org)
@@ -1582,7 +1592,7 @@ if (typeof window != 'undefined') {
   window.ejs = exports;
 }
 
-},{"../package.json":9,"./utils":8,"fs":10,"path":11}],8:[function(require,module,exports){
+},{"../package.json":10,"./utils":9,"fs":11,"path":12}],9:[function(require,module,exports){
 /*
  * EJS Embedded JavaScript templates
  * Copyright 2112 Matthew Eernisse (mde@fleegix.org)
@@ -1725,7 +1735,7 @@ exports.cache = {
 };
 
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 module.exports={
   "name": "ejs",
   "description": "Embedded JavaScript templates",
@@ -1809,9 +1819,9 @@ module.exports={
   "directories": {}
 }
 
-},{}],10:[function(require,module,exports){
-
 },{}],11:[function(require,module,exports){
+
+},{}],12:[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -2039,7 +2049,7 @@ var substr = 'ab'.substr(-1) === 'b'
 ;
 
 }).call(this,require('_process'))
-},{"_process":12}],12:[function(require,module,exports){
+},{"_process":13}],13:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
