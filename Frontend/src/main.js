@@ -13,7 +13,7 @@ $(function () {
 
 	$("#all-pizza-filter").click(function () {
 		PizzaMenu.filterPizza('');
-		$("#filter-title").html($(this).find('a').html()+' піци');
+		$("#filter-title").html($(this).find('a').html() + ' піци');
 		$('.nav li').removeClass('active');
 		$(this).addClass('active');
 	});
@@ -55,5 +55,13 @@ $(function () {
 
 	$('#clear-order').click(function () {
 		PizzaCart.removeAll();
+	});
+
+	$('#order-btn').click(function () {
+		window.location = '/order.html';
+	});
+
+	$('#edit-order-btn').click(function () {
+		window.location = '/';
 	});
 });
