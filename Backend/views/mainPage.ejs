@@ -1,7 +1,41 @@
 <% include common/header.ejs %>
 
-<div class="">
-    Main Page Content
-</div>
+<div class="main-field">
+			<div class="main-title">
+				<h2><div id="filter-title">Усі піци</div> <span class="badge" id="all-pizzas-counter">8</span></h2>
+			</div>
+			<div class="sort-area">
+				<ul class="nav nav-pills nav-custom">
+					<li role="presentation" class="active pizza-filter" id="all-pizza-filter"><a href="#">Усі</a></li>
+					<li role="presentation" class="pizza-filter" id="meat-pizza-filter"><a href="#">М'ясні</a></li>
+					<li role="presentation" class="pizza-filter" id="pineapple-pizza-filter"><a href="#">З ананасами</a></li>
+					<li role="presentation" class="pizza-filter" id="mushroom-pizza-filter"><a href="#">З грибами</a></li>
+					<li role="presentation" class="pizza-filter" id="seefood-pizza-filter"><a href="#">З морепродуктами</a></li>
+					<li role="presentation" class="pizza-filter" id="no-meat-pizza-filter"><a href="#">Вега</a></li>
+				</ul>
+			</div>
+			<div class="row" id="pizza_list">
+				<!-- pizza_list is here -->
+			</div>
+			<div class="right-panel">
+				<div class="summary-top">
+					<span class="right-panel-title">Замовлення<span class="badge" id="order-counter">0</span></span>
+					<span id="clear-order">Очистити замовлення</span>
+				</div>
+				<div class="summary-main" id='cart'>
+					<!-- Cart of pizzas -->
+				</div>
+				<div class="summary-bottom">
+					<div id="summary-total">
+						<div id="summary-wrapper">
+							<span id="summary-total-title">Сума замовлення</span>
+							<span class="summary-total-counter">грн</span>
+							<span id="summary-total-counter">0</span>
+						</div>
+					</div>
+					<div class="btn btn-lg btn-warning" id="order-btn">Замовити</div>
+				</div>
+			</div>
+		</div>
 
 <% include common/footer.ejs %>
