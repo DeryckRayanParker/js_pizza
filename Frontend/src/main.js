@@ -11,6 +11,7 @@ $(function () {
 	PizzaCart.initialiseCart();
 	PizzaMenu.initialiseMenu();
 
+	//sorting buttons
 	$("#all-pizza-filter").click(function () {
 		PizzaMenu.filterPizza('');
 		$("#filter-title").html($(this).find('a').html() + ' піци');
@@ -57,11 +58,76 @@ $(function () {
 		PizzaCart.removeAll();
 	});
 
+	//right-panel func
 	$('#order-btn').click(function () {
 		window.location = '/order.html';
 	});
 
 	$('#edit-order-btn').click(function () {
 		window.location = '/';
+	});
+
+	//order-form
+	$('#name-input').on('input', function (event) {
+		var filter = /^[a-zA-Zа-яА-ЯіІїЇєЄ' ]+$/;
+		if (!($(this).val().match(filter))) {
+			if (!($(this).val())) {
+				$('#name-input-error').hide();
+				$('#null-name-input-error').show();
+			} else {
+				$('#null-name-input-error').hide();
+				$('#name-input-error').show();
+			}
+			$('#name-grp').removeClass('has-success');
+			$('#name-grp').addClass('has-error');
+		} else {
+			$('#name-input-error').hide();
+			$('#null-name-input-error').hide();
+			
+			$('#name-grp').removeClass('has-error');
+			$('#name-grp').addClass('has-success');
+		}
+	});
+
+	$('#phone-input').on('input', function (event) {
+		var filter = /^(\+38)?(0)[0-9]{9}$/;
+		if (!($(this).val().match(filter))) {
+			if (!($(this).val())) {
+				$('#phone-input-error').hide();
+				$('#null-phone-input-error').show();
+			} else {
+				$('#null-phone-input-error').hide();
+				$('#phone-input-error').show();
+			}
+			$('#phone-grp').removeClass('has-success');
+			$('#phone-grp').addClass('has-error');
+		} else {
+			$('#phone-input-error').hide();
+			$('#null-phone-input-error').hide();
+
+			$('#phone-grp').removeClass('has-error');
+			$('#phone-grp').addClass('has-success');
+		}
+	});
+
+	$('#address-input').on('input', function (event) {
+		var filter = /^[a-zA-Zа-яА-ЯіІїЇєЄ0-9\s\,\'\. -]+$/;
+		if (!($(this).val().match(filter))) {
+			if (!($(this).val())) {
+				$('#address-input-error').hide();
+				$('#null-address-input-error').show();
+			} else {
+				$('#null-address-input-error').hide();
+				$('#address-input-error').show();
+			}
+			$('#address-grp').removeClass('has-success');
+			$('#address-grp').addClass('has-error');
+		} else {
+			$('#address-input-error').hide();
+			$('#null-address-input-error').hide();
+			
+			$('#address-grp').removeClass('has-error');
+			$('#address-grp').addClass('has-success');
+		}
 	});
 });
