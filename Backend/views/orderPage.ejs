@@ -1,0 +1,26 @@
+<% include common/header.ejs %>
+
+	div class="main-field">
+
+	<div class="right-panel non-editable">
+		<div class="summary-top">
+			<span class="right-panel-title">Замовлення<span class="badge" id="order-counter">0</span></span>
+			<span id="clear-order">Очистити замовлення</span>
+		</div>
+		<div class="summary-main" id='cart'>
+			<!-- Cart of pizzas -->
+		</div>
+		<div class="summary-bottom">
+			<div id="summary-total">
+				<div id="summary-wrapper">
+					<span id="summary-total-title">Сума замовлення</span>
+					<span class="summary-total-counter">грн</span>
+					<span id="summary-total-counter">0</span>
+				</div>
+			</div>
+			<div class="btn btn-lg btn-default" id="edit-order-btn">Редагувати замовлення</div>
+		</div>
+	</div>
+	</div>
+
+	<% include common/footer.ejs %>

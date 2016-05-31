@@ -170,7 +170,7 @@ hr {
 }
 .summary-main {
 	background-color: #F5F5F5;
-	height: 100%; 
+	height: 100%;
 	overflow-y: auto;
 }
 #order-counter {
@@ -223,7 +223,7 @@ hr {
 	height: 120px;
 	position: relative;
 	padding: 5px;
-	border-bottom: 1px solid #A1A1A1;
+	border-bottom: 1px solid #DDDDDD;
 }
 .pizza-ordered-title {
 	margin: 15px 20px 0 20px;
@@ -265,7 +265,24 @@ ul.nav-custom {
 	font-size: 12px;
 	border-radius: 15px;
 }
-
 #filter-title {
+	display: inline;
+}
+#edit-order-btn {
+	width: 100%;
+	min-height: 50px;
+	margin-top: 5px;
+	-moz-box-shadow: inset 0px 0px 30px #ccc;
+	-webkit-box-shadow: inset 0px 0px 30px #ccc;
+	box-shadow: inset  0px 0px 30px #ccc;
+}
+.non-editable-label{
+	display: none;
+}
+.non-editable #clear-order,
+.non-editable .btn-xs{
+	display: none;
+}
+.non-editable .non-editable-label{
 	display: inline;
 }
