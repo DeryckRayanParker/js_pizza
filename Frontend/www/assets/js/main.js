@@ -188,7 +188,22 @@ exports.PizzaMenu_OneItem = ejs.compile("<%\r\n\r\nfunction getIngredientsArray(
 
 exports.PizzaCart_OneItem = ejs.compile("<div class=\"pizza-ordered\">\r\n\t<img class=\"pizza-ordered-pic\" src=\"<%= pizza.icon %>\" />\r\n\t<p class=\"pizza-ordered-title\">\r\n\t\t<%= pizza.title %>\r\n\t</p>\r\n\t<div class=\"pizza-ordered-info\">\r\n\t\t<div class=\"ordered-size\">\r\n\t\t\t<img src=\"assets/images/size-icon.svg\" />\r\n\t\t\t<span class=\"size\"><%= pizza[size].size %></span>\r\n\t\t</div>\r\n\t\t<div>\r\n\t\t\t<img src=\"assets/images/weight.svg\" />\r\n\t\t\t<span class=\"weight\"><%= pizza[size].weight %></span>\r\n\t\t</div>\r\n\t</div>\r\n\t<div class=\"pizza-ordered-pricing-space\">\r\n\t\t<span class=\"ordered-price\"><%= pizza[size].price %> грн</span>\r\n\t\t<a class=\"btn minus btn-xs btn-danger circle-btn\"><span class=\"glyphicon glyphicon-minus\"></span></a>\r\n\t\t<span class=\"pizza-ordered-counter\"> <%= quantity %> </span>\r\n\t\t<span class=\"non-editable-label\">шт.</span>\r\n\t\t<a class=\"btn plus btn-xs btn-success circle-btn\"><span class=\"glyphicon glyphicon-plus\"></span></a>\r\n\t\t<a class=\"btn btn-xs btn-default circle-btn rm-btn\"><span class=\"glyphicon glyphicon-remove\"></span></a>\r\n\t</div>\r\n</div>\r\n");
 
-},{"ejs":8}],3:[function(require,module,exports){
+},{"ejs":9}],3:[function(require,module,exports){
+ var initialize = function() {
+	var mapProp = {
+		center: new google.maps.LatLng(50.464379, 30.519131),
+		zoom: 13
+	};
+	var html_element = document.getElementById("map-container");
+	var map = new google.maps.Map(html_element, mapProp);
+}
+var init = function () {
+	google.maps.event.addDomListener(window, 'load', initialize);
+}
+
+exports.init = init;
+
+},{}],4:[function(require,module,exports){
 /**
  * Created by chaika on 25.01.16.
  */
@@ -198,6 +213,8 @@ $(function () {
 	var PizzaMenu = require('./pizza/PizzaMenu');
 	var PizzaCart = require('./pizza/PizzaCart');
 	var Pizza_List = require('./Pizza_List');
+	
+	var map = require('./googleMap');
 
 	PizzaCart.initialiseCart();
 	PizzaMenu.initialiseMenu();
@@ -274,7 +291,7 @@ $(function () {
 		} else {
 			$('#name-input-error').hide();
 			$('#null-name-input-error').hide();
-			
+
 			$('#name-grp').removeClass('has-error');
 			$('#name-grp').addClass('has-success');
 		}
@@ -316,38 +333,40 @@ $(function () {
 		} else {
 			$('#address-input-error').hide();
 			$('#null-address-input-error').hide();
-			
+
 			$('#address-grp').removeClass('has-error');
 			$('#address-grp').addClass('has-success');
 		}
 	});
-	
-	$('#btn-next').click(function(){
-		if(!($('#name-grp').hasClass('has-error'))&&!($('#phone-grp').hasClass('has-error'))&&!($('#address-grp').hasClass('has-error'))){
-		$.ajax({
-			url: '/api/create-order',
-			type: 'POST',
-			contentType: 'application/json',
-			data: JSON.stringify({
-				name: $('#name-input').val(),
-				phone: $('#phone-input').val(),
-				address: $('#address-input').val(),
-				cart: PizzaCart.getPizzaInCart(),
-				totalPrice: $('#summary-total-counter').html()
-			}),
-			success: function(data){
-				console.warn('order: OK');
-			}, 
-			fail: function(){
-				console.error('order: FAIL');
-			}
-		})
+
+	$('#btn-next').click(function () {
+		if (!($('#name-grp').hasClass('has-error')) && !($('#phone-grp').hasClass('has-error')) && !($('#address-grp').hasClass('has-error'))) {
+			$.ajax({
+				url: '/api/create-order',
+				type: 'POST',
+				contentType: 'application/json',
+				data: JSON.stringify({
+					name: $('#name-input').val(),
+					phone: $('#phone-input').val(),
+					address: $('#address-input').val(),
+					cart: PizzaCart.getPizzaInCart(),
+					totalPrice: $('#summary-total-counter').html()
+				}),
+				success: function (data) {
+					console.warn('order: OK');
+				},
+				fail: function () {
+					console.error('order: FAIL');
+				}
+			})
 		}
 	});
+
+	map.init();
 	
 });
 
-},{"./Pizza_List":1,"./pizza/PizzaCart":4,"./pizza/PizzaMenu":5}],4:[function(require,module,exports){
+},{"./Pizza_List":1,"./googleMap":3,"./pizza/PizzaCart":5,"./pizza/PizzaMenu":6}],5:[function(require,module,exports){
 /**
  * Created by chaika on 02.02.16.
  */
@@ -486,7 +505,7 @@ exports.initialiseCart = initialiseCart;
 exports.PizzaSize = PizzaSize;
 exports.removeAll = removeAll;
 
-},{"../Templates":2,"../storage/storage":6}],5:[function(require,module,exports){
+},{"../Templates":2,"../storage/storage":7}],6:[function(require,module,exports){
 /**
  * Created by chaika on 02.02.16.
  */
@@ -549,7 +568,7 @@ function initialiseMenu() {
 exports.filterPizza = filterPizza;
 exports.initialiseMenu = initialiseMenu;
 
-},{"../Pizza_List":1,"../Templates":2,"./PizzaCart":4}],6:[function(require,module,exports){
+},{"../Pizza_List":1,"../Templates":2,"./PizzaCart":5}],7:[function(require,module,exports){
 var basil = require('basil.js');
 basil = new basil();
 
@@ -560,7 +579,7 @@ exports.set = function (key, value) {
 	return basil.set(key, value);
 };
 
-},{"basil.js":7}],7:[function(require,module,exports){
+},{"basil.js":8}],8:[function(require,module,exports){
 (function () {
 	// Basil
 	var Basil = function (options) {
@@ -929,7 +948,7 @@ exports.set = function (key, value) {
 
 })();
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 /*
  * EJS Embedded JavaScript templates
  * Copyright 2112 Matthew Eernisse (mde@fleegix.org)
@@ -1690,7 +1709,7 @@ if (typeof window != 'undefined') {
   window.ejs = exports;
 }
 
-},{"../package.json":10,"./utils":9,"fs":11,"path":12}],9:[function(require,module,exports){
+},{"../package.json":11,"./utils":10,"fs":12,"path":13}],10:[function(require,module,exports){
 /*
  * EJS Embedded JavaScript templates
  * Copyright 2112 Matthew Eernisse (mde@fleegix.org)
@@ -1833,7 +1852,7 @@ exports.cache = {
 };
 
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 module.exports={
   "name": "ejs",
   "description": "Embedded JavaScript templates",
@@ -1917,9 +1936,9 @@ module.exports={
   "directories": {}
 }
 
-},{}],11:[function(require,module,exports){
-
 },{}],12:[function(require,module,exports){
+
+},{}],13:[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -2147,7 +2166,7 @@ var substr = 'ab'.substr(-1) === 'b'
 ;
 
 }).call(this,require('_process'))
-},{"_process":13}],13:[function(require,module,exports){
+},{"_process":14}],14:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -2243,4 +2262,4 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}]},{},[3]);
+},{}]},{},[4]);

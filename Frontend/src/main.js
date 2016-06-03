@@ -7,6 +7,8 @@ $(function () {
 	var PizzaMenu = require('./pizza/PizzaMenu');
 	var PizzaCart = require('./pizza/PizzaCart');
 	var Pizza_List = require('./Pizza_List');
+	
+	var map = require('./googleMap');
 
 	PizzaCart.initialiseCart();
 	PizzaMenu.initialiseMenu();
@@ -83,7 +85,7 @@ $(function () {
 		} else {
 			$('#name-input-error').hide();
 			$('#null-name-input-error').hide();
-			
+
 			$('#name-grp').removeClass('has-error');
 			$('#name-grp').addClass('has-success');
 		}
@@ -125,33 +127,35 @@ $(function () {
 		} else {
 			$('#address-input-error').hide();
 			$('#null-address-input-error').hide();
-			
+
 			$('#address-grp').removeClass('has-error');
 			$('#address-grp').addClass('has-success');
 		}
 	});
-	
-	$('#btn-next').click(function(){
-		if(!($('#name-grp').hasClass('has-error'))&&!($('#phone-grp').hasClass('has-error'))&&!($('#address-grp').hasClass('has-error'))){
-		$.ajax({
-			url: '/api/create-order',
-			type: 'POST',
-			contentType: 'application/json',
-			data: JSON.stringify({
-				name: $('#name-input').val(),
-				phone: $('#phone-input').val(),
-				address: $('#address-input').val(),
-				cart: PizzaCart.getPizzaInCart(),
-				totalPrice: $('#summary-total-counter').html()
-			}),
-			success: function(data){
-				console.warn('order: OK');
-			}, 
-			fail: function(){
-				console.error('order: FAIL');
-			}
-		})
+
+	$('#btn-next').click(function () {
+		if (!($('#name-grp').hasClass('has-error')) && !($('#phone-grp').hasClass('has-error')) && !($('#address-grp').hasClass('has-error'))) {
+			$.ajax({
+				url: '/api/create-order',
+				type: 'POST',
+				contentType: 'application/json',
+				data: JSON.stringify({
+					name: $('#name-input').val(),
+					phone: $('#phone-input').val(),
+					address: $('#address-input').val(),
+					cart: PizzaCart.getPizzaInCart(),
+					totalPrice: $('#summary-total-counter').html()
+				}),
+				success: function (data) {
+					console.warn('order: OK');
+				},
+				fail: function () {
+					console.error('order: FAIL');
+				}
+			})
 		}
 	});
+
+	map.init();
 	
 });
