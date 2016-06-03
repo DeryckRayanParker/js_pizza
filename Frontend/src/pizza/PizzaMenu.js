@@ -41,7 +41,7 @@ function filterPizza(filter) {
 		if (filter === '') {
 			pizza_shown.push(pizza);
 		} else if (pizza.content[filter]||
-			(filter === 'no-meat' && !(pizza.content['meat']))) {
+			(filter === 'no-meat' && (pizza.type==='Вега піца'))) {
 			pizza_shown.push(pizza);
 		}
 	});
