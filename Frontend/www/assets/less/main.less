@@ -145,14 +145,15 @@ hr {
 	box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
 .main-field {
-	margin-top: 150px;
-	padding-left: 20px;
+	margin: 150px auto;
+	//margin-left: 20px;
 	padding-right: @right-panel-width+40px;
+	max-width: 1300px;
 }
 .footer {
 	margin-right: @right-panel-width;
 	color: #A8A5A2;
-	margin-top: 20px;
+	margin-top: 30px;
 	margin-bottom: 30px;
 	text-align: center;
 }
@@ -224,7 +225,7 @@ hr {
 	height: 120px;
 	position: relative;
 	padding: 5px;
-	border-bottom: 1px solid #DDDDDD;
+	border-bottom: 1px solid #eee;
 }
 .pizza-ordered-title {
 	margin: 15px 20px 0 20px;
@@ -287,16 +288,100 @@ ul.nav-custom {
 .non-editable .non-editable-label {
 	display: inline;
 }
-.main-container {
-	margin-left: 5%;
-	margin-right: 5%;
-}
+
 .input-error {
 	color: #d9534f;
 	font-size: 13px;
 	margin-left: 20%;
 }
 .footer-hr {
-	border: 1px solid #DDDDDD;
+	border: 0.5px solid #EEE;
 	margin-right: @right-panel-width;
+}
+
+.bs-callout {
+    padding: 20px;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-radius: 3px;
+}
+.bs-callout-warning {
+    border-left-color: #f0ad4e;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.info {
+	min-height: 150px;
+}
+
+.map-container {
+	height: 250px;
+	width: 100%;
+	margin-top: 15px;
+	border: 1px solid #eeeeee;
+}
+
+button#btn-next {
+	font-weight: bold;
+	width: 100px;
+	margin-top: 25px;
+	float: right;
+	background-color: @primary-color;
+}
+button#btn-next:hover{
+	background-color: #EC890E;
+}
+
+
+
+.form-container {
+	clear: both;
+}
+
+.footer-wrapper {
+	margin-top: 30px;
+}
+
+
+
+.info-title {
+	font-weight: 100;
+	font-size: 18px;
+}
+
+.info-label {
+	font-weight: bold;
+}
+
+#info-delivery-time,
+#info-address{
+	font-weight: normal;
+}
+
+
+
+
+
+.form-title {
+	font-size: 19px;
+	font-weight: bold;
+	margin-left: 15%;
+	margin-bottom: 15px;
+}
+
+
+
+.main-container {
+	padding-left: 20px;
 }

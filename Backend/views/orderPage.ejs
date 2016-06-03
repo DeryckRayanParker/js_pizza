@@ -3,41 +3,52 @@
 	<div class="main-field">
 		<div class="main-container">
 			<div class="form-container">
-				<h3>Контактні дані</h3>
-				<br/>
 				<div class="form-info-box">
-					<form role="form" class="form-horizontal">
+						<div class="form-title">Контактні дані</div>
+					<form role="form" class="form-horizontal col-md-7">
 						<div class="form-group" id="name-grp">
-							<label class="control-label col-sm-2" for="name">Ім'я</label>
-							<div class="col-sm-10">
+							<label class="control-label col-sm-3" for="name">Ім'я</label>
+							<div class="col-sm-9">
 								<input type="text" class="form-control" id="name-input" placeholder="Ім'я, прізвище" />
 							</div>
 							<span class="input-error" id="name-input-error" hidden>Введіть лише свої прізвище та ім'я</span>
 							<span class="input-error" id="null-name-input-error" hidden>Заповніть це поле</span>
 						</div>
 						<div class="form-group" id="phone-grp">
-							<label class="control-label col-sm-2" for="phone">Телефон</label>
-							<div class="col-sm-10">
+							<label class="control-label col-sm-3" for="phone">Телефон</label>
+							<div class="col-sm-9">
 								<input type="text" class="form-control" id="phone-input" placeholder="+380952225222" />
 							</div>
 							<span class="input-error" id="phone-input-error" hidden>Введіть номер телефону у форматі +380 або почніть з 0</span>
 							<span class="input-error" id="null-phone-input-error" hidden>Заповніть це поле</span>
 						</div>
 						<div class="form-group" id="address-grp">
-							<label class="control-label col-sm-2" for="address">Адреса</label>
-							<div class="col-sm-10">
+							<label class="control-label col-sm-3" for="address">Адреса</label>
+							<div class="col-sm-9">
 								<input type="text" class="form-control" id="address-input" placeholder="м. Київ, вул. М.Цвєтаєвої, 14-Б" />
 							</div>
 							<span class="input-error" id="address-input-error" hidden>Введіть достовірну адресу</span>
 							<span class="input-error" id="null-address-input-error" hidden>Заповніть поле адреси</span>
 						</div>
 					</form>
-
-
+					<div class="info col-md-5 bs-callout bs-callout-warning">
+						
+						
+						<div class="info-title">
+						Інформація про замовлення					</div>
+						<br/>
+						<div class="info-label">Прибизний час доставки: <span id="info-delivery-time">невідомо</span></div>
+						<br/>
+						<div class="info-label">Адреса доставки: <span id="info-address">невідомо</span></div>
+					</div>
+					
 				</div>
+				<button class="btn btn-warning" id="btn-next">Далі ></button>
 			</div>
-			<div class="map-container">
+			<div class="map-container col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<!-- map goes here! -->
+				
+				HERE's a MAP!
 			</div>
 		</div>
 		<div class="right-panel non-editable">
