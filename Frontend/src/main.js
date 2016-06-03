@@ -7,7 +7,7 @@ $(function () {
 	var PizzaMenu = require('./pizza/PizzaMenu');
 	var PizzaCart = require('./pizza/PizzaCart');
 	var Pizza_List = require('./Pizza_List');
-	
+
 	var map = require('./googleMap');
 
 	PizzaCart.initialiseCart();
@@ -114,6 +114,7 @@ $(function () {
 
 	$('#address-input').on('input', function (event) {
 		var filter = /^[a-zA-Zа-яА-ЯіІїЇєЄ0-9\s\,\'\. -]+$/;
+		$('#info-address').html($(this).val());
 		if (!($(this).val().match(filter))) {
 			if (!($(this).val())) {
 				$('#address-input-error').hide();
@@ -131,31 +132,69 @@ $(function () {
 			$('#address-grp').removeClass('has-error');
 			$('#address-grp').addClass('has-success');
 		}
+		map.geocodeAddress($(this).val(), function (err) {
+			if (!err) {
+				$('#address-input-error').hide();
+				$('#null-address-input-error').hide();
+
+				$('#address-grp').removeClass('has-error');
+				$('#address-grp').addClass('has-success');
+			} else {
+				$('#null-address-input-error').hide();
+				$('#address-input-error').show();
+				$('#address-grp').removeClass('has-success');
+				$('#address-grp').addClass('has-error');
+			}
+		});
 	});
 
 	$('#btn-next').click(function () {
 		if (!($('#name-grp').hasClass('has-error')) && !($('#phone-grp').hasClass('has-error')) && !($('#address-grp').hasClass('has-error'))) {
-			$.ajax({
-				url: '/api/create-order',
-				type: 'POST',
-				contentType: 'application/json',
-				data: JSON.stringify({
-					name: $('#name-input').val(),
-					phone: $('#phone-input').val(),
-					address: $('#address-input').val(),
-					cart: PizzaCart.getPizzaInCart(),
-					totalPrice: $('#summary-total-counter').html()
-				}),
-				success: function (data) {
-					console.warn('order: OK');
-				},
-				fail: function () {
-					console.error('order: FAIL');
-				}
-			})
+			var err = false;
+			if (!($('#name-input').val())) {
+				$('#null-name-input-error').show();
+				$('#name-input-error').hide();
+				$('#name-grp').removeClass('has-success');
+				$('#name-grp').addClass('has-error');
+				err = true;
+			}
+			if (!($('#phone-input').val())) {
+				$('#null-phone-input-error').show();
+				$('#phone-input-error').hide();
+				$('#phone-grp').removeClass('has-success');
+				$('#phone-grp').addClass('has-error');
+				err = true;
+			}
+			if (!($('#address-input').val())) {
+				$('#null-address-input-error').show();
+				$('#address-input-error').hide();
+				$('#address-grp').removeClass('has-success');
+				$('#address-grp').addClass('has-error');
+				err = true;
+			}
+			if (!err) {
+				$.ajax({
+					url: '/api/create-order',
+					type: 'POST',
+					contentType: 'application/json',
+					data: JSON.stringify({
+						name: $('#name-input').val(),
+						phone: $('#phone-input').val(),
+						address: $('#address-input').val(),
+						cart: PizzaCart.getPizzaInCart(),
+						totalPrice: $('#summary-total-counter').html()
+					}),
+					success: function (data) {
+						console.warn('order: OK');
+					},
+					fail: function () {
+						console.error('order: FAIL');
+					}
+				})
+			}
 		}
 	});
 
 	map.init();
-	
+
 });
