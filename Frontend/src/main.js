@@ -130,4 +130,28 @@ $(function () {
 			$('#address-grp').addClass('has-success');
 		}
 	});
+	
+	$('#btn-next').click(function(){
+		if(!($('#name-grp').hasClass('has-error'))&&!($('#phone-grp').hasClass('has-error'))&&!($('#address-grp').hasClass('has-error'))){
+		$.ajax({
+			url: '/api/create-order',
+			type: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify({
+				name: $('#name-input').val(),
+				phone: $('#phone-input').val(),
+				address: $('#address-input').val(),
+				cart: PizzaCart.getPizzaInCart(),
+				totalPrice: $('#summary-total-counter').html()
+			}),
+			success: function(data){
+				console.warn('order: OK');
+			}, 
+			fail: function(){
+				console.error('order: FAIL');
+			}
+		})
+		}
+	});
+	
 });
