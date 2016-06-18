@@ -6,7 +6,7 @@ $(function () {
 	//This code will execute when the page is ready
 	var PizzaMenu = require('./pizza/PizzaMenu');
 	var PizzaCart = require('./pizza/PizzaCart');
-	var Pizza_List = require('./Pizza_List');
+	var API = require('./API');
 
 	var map = require('./googleMap');
 
@@ -173,24 +173,37 @@ $(function () {
 				err = true;
 			}
 			if (!err) {
-				$.ajax({
-					url: '/api/create-order',
-					type: 'POST',
-					contentType: 'application/json',
-					data: JSON.stringify({
-						name: $('#name-input').val(),
-						phone: $('#phone-input').val(),
-						address: $('#address-input').val(),
-						cart: PizzaCart.getPizzaInCart(),
-						totalPrice: $('#summary-total-counter').html()
-					}),
-					success: function (data) {
-						console.warn('order: OK');
-					},
-					fail: function () {
-						console.error('order: FAIL');
+				API.createOrder({
+					name: $('#name-input').val(),
+					phone: $('#phone-input').val(),
+					address: $('#address-input').val(),
+					cart: PizzaCart.getPizzaInCart(),
+					totalPrice: $('#summary-total-counter').html()
+				}, function (err, res) {
+					if (!err) {
+						LiqPayCheckout.init({
+							data: res.data,
+							signature: res.signature,
+							embedTo: "#liqpay",
+							mode: "popup"
+						}).on("liqpay.callback", function (data) {
+							if (data.status === "success" || data.status === "sandbox") {
+								alert("Дякуємо за покупку!");
+								//window.location = "/";
+							}
+							else{
+								alert("Помилка транзакції =(");
+							}
+						}).on("liqpay.ready", function (data) {
+
+						}).on("liqpay.close", function (data) {
+
+						});
+
+					} else {
+						console.error(err);
 					}
-				})
+				});
 			}
 		}
 	});

@@ -92,7 +92,6 @@ var initialize = function () {
 		var coordinates = me.latLng;
 		geocodeLatLng(coordinates, function (err, adress) {
 			if (!err) {
-				console.log(adress);
 				$('#info-address').html(adress);
 				$('#address-input').val(adress);
 				calculateRoute(PizzaHome, me.latLng, function (error, time) {

@@ -108,7 +108,6 @@ function updateCart() {
 	Cart.forEach(function (e) {
 		showOnePizzaInCart(e);
 		total += (e.pizza[e.size].price * e.quantity);
-		console.warn(e.pizza[e.size].price + ' + ' + e.quantity);
 	});
 	if (Cart.length === 0) {
 		$cart.append('<div id="gag-message">Порожньо в холодильнику?						<br/> Замовте піцу!</div>');
